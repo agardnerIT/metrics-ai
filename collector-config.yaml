@@ -2,9 +2,12 @@
 receivers:
   prometheus:
     config:
+      # Scrape localhost:8000/metrics every 5 seconds
+      # add a label to each retrieved metric to denote it came from 'dummy-app'
       scrape_configs:
         - job_name: 'dummy-app'
           scrape_interval: 5s
+          metrics_path: '/metrics'
           static_configs:
             - targets: ['localhost:8000']
 # What am I doing with the data?
@@ -25,6 +28,7 @@ exporters:
 # eg. `metrics/pipelineFoo` and `metrics/pipelineBar`
 # Here I just define a single metrics type pipeline
 # It receives data via the Prometheus receiver and exports to debug (console out)
+# Notice I don't have any processors yet!
 service:
   pipelines:
     metrics:
