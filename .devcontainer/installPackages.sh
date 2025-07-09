@@ -16,7 +16,8 @@ tar -xvf otelcol-contrib_${COLLECTOR_VERSION}_linux_amd64.tar.gz
 rm otelcol-contrib_${COLLECTOR_VERSION}_linux_amd64.tar.gz
 
 # Download OpenTelemetry Collector Builder
-wget https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/cmd%2Fbuilder%2Fv${COLLECTOR_VERSION}/ocb_${COLLECTOR_VERSION}_linux_amd64
+wget -O ocb https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/cmd%2Fbuilder%2Fv${COLLECTOR_VERSION}/ocb_${COLLECTOR_VERSION}_linux_amd64
+chmod +x ocb
 
 # Create Python venv scaffolding
 python3 -m venv .

@@ -33,10 +33,14 @@ fastapi run app.py --host 0.0.0.0 --port 8000
 ```
 
 ## Access the App
-The application has two pages:
+The application has two pages. Open both of these pages in two different tabs.
 
-* `/` - the root path is the "application logic". You're not so interested in this page.
+* `/` - the root path is the "application logic".
 * `/metrics` - this is the page of Prometheus metrics. The collector will "watch" this page
+
+Each time you refresh the root page, `app_requests_total` will increment by `1`. `app_random_number` will also be set to a new value between `0` and `100`.
+
+Refreshing `/metrics` will show the new values each time you refresh `/`.
 
 ## Start Collector
 

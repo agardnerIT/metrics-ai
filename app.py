@@ -18,10 +18,10 @@ import prometheus_client as prom_client
 #  app_random_number 32.0
 #
 
-# Uncomment these to show the relevant metrics on /metrics
-#prom_client.REGISTRY.unregister(prom_client.PROCESS_COLLECTOR)
-#prom_client.REGISTRY.unregister(prom_client.PLATFORM_COLLECTOR)
-#prom_client.REGISTRY.unregister(prom_client.GC_COLLECTOR)
+# Comment these out to show the relevant metrics on /metrics
+prom_client.REGISTRY.unregister(prom_client.PROCESS_COLLECTOR)
+prom_client.REGISTRY.unregister(prom_client.PLATFORM_COLLECTOR)
+prom_client.REGISTRY.unregister(prom_client.GC_COLLECTOR)
 
 app = FastAPI()
 # Tell Prometheus to create a sub-application and attach it at /metrics
