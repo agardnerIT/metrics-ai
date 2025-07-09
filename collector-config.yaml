@@ -1,0 +1,32 @@
+# Where is telemetry (metrics, logs and traces) coming from?
+receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'dummy-app'
+          scrape_interval: 5s
+          static_configs:
+            - targets: ['localhost:8000']
+# What am I doing with the data?
+#processors:
+
+# Where am I sending the data?
+exporters:
+  debug:
+    verbosity: detailed
+
+# The above components can be mixed and matched
+# So don't to build your pipeline(s) here!
+#
+# https://opentelemetry.io/docs/collector/configuration/#pipelines
+#
+# Pipeline types are 'logs', 'metrics' or 'traces'
+# You can have multiple of each type by naming them `type/unique_name`
+# eg. `metrics/pipelineFoo` and `metrics/pipelineBar`
+# Here I just define a single metrics type pipeline
+# It receives data via the Prometheus receiver and exports to debug (console out)
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus]
+      exporters: [debug]
