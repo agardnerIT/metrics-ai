@@ -3,3 +3,5 @@ bin
 include
 notes.txt
 .env
+lib*
+pyvenv.cfg

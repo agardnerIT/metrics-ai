@@ -1,20 +1,25 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 import random
-from prometheus_client import Counter, Gauge, make_asgi_app
+import prometheus_client as prom_client
+
+# Uncomment these to show the relevant metrics on /metrics
+#prom_client.REGISTRY.unregister(prom_client.PROCESS_COLLECTOR)
+#prom_client.REGISTRY.unregister(prom_client.PLATFORM_COLLECTOR)
+#prom_client.REGISTRY.unregister(prom_client.GC_COLLECTOR)
 
 app = FastAPI()
-metrics_app = make_asgi_app()
+metrics_app = prom_client.make_asgi_app()
 app.mount("/metrics", metrics_app)
 
 # Define Prometheus metrics
-REQUEST_COUNTER = Counter(
+REQUEST_COUNTER = prom_client.Counter(
     "app_requests_total",  # Metric name
     "Total number of requests to the app",  # Metric description
     ["endpoint"],  # Labels (e.g., endpoint name)
 )
 
-RANDOM_NUMBER_GAUGE = Gauge(
+RANDOM_NUMBER_GAUGE = prom_client.Gauge(
     "app_random_number",  # Metric name
     "Current value of the random number",  # Metric description
 )
